@@ -23,6 +23,12 @@ func newError(n C.int) error {
 	return Error(n)
 }
 
+// Version returns a string identifying the version of the netCDF library, and when it was built.
+// This function takes no arguments, and thus no errors are possible in its invocation.
+func Version() string {
+	return C.GoString(C.nc_inq_libvers())
+}
+
 // Error returns a string representation of Error e.
 func (e Error) Error() string {
 	return C.GoString(C.nc_strerror(C.int(e)))
